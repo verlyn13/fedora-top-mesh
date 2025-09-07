@@ -18,6 +18,7 @@ This repository contains the specific configuration for the Fedora laptop (Think
 
 - **mesh-infra**: Central infrastructure definitions, policies, and shared configurations
 - **fedora-top-mesh**: This laptop's specific implementation and state
+- **fedora-wsl-mesh**: WSL node (wsl-fedora-kbc) at University of Alaska
 
 ## Configuration Structure
 
