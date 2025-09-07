@@ -6,9 +6,9 @@ Device-specific configuration for `fedora-top` laptop in the mesh infrastructure
 
 - **Hostname**: fedora-top
 - **Tailscale Name**: laptop-hq
-- **Role**: Workstation, Roaming Device
-- **Mesh IP**: 10.0.0.2/24 (planned)
-- **Status**: Pending Deployment
+- **Role**: Workstation, Roaming Device, Ansible Managed Node
+- **Mesh IP**: 100.84.2.8 (active)
+- **Status**: Phase 1 & 2 Complete - Fully Operational
 
 ## Purpose
 
@@ -24,34 +24,67 @@ This repository contains the specific configuration for the Fedora laptop (Think
 ```
 fedora-top-mesh/
 ├── config/
-│   ├── tailscale/      # Tailscale-specific settings
-│   ├── wireguard/      # WireGuard fallback configs
-│   └── services/       # Local service configurations
+│   ├── mesh-integration.yml    # Integration with mesh-infra
+│   └── ansible-integration.yml # Ansible management config
 ├── scripts/
-│   ├── join-mesh.sh    # Script to join the mesh network
-│   ├── health-check.sh # Connectivity verification
-│   └── sync-state.sh   # Sync with mesh-infra
+│   ├── join-mesh.sh                   # Join mesh network
+│   ├── report-status.sh              # Generate status reports
+│   ├── ansible-readiness-check.sh    # Verify Ansible readiness
+│   ├── configure-ansible-sudo.sh     # Setup passwordless sudo
+│   ├── test-ansible-connectivity.sh  # Test management connectivity
+│   └── ansible-facts.sh              # Generate Ansible facts
 ├── state/
-│   └── current.json    # Current device state
-└── .env.example        # Environment variables template
+│   └── current.json                  # Current device state
+├── docs/
+│   ├── ANSIBLE_READINESS.md         # Ansible setup documentation
+│   └── INTEGRATION.md               # Integration patterns
+└── DEPLOYMENT_STATUS.md             # Current deployment status
 ```
 
-## Getting Started
+## Current Capabilities
 
-1. **Prerequisites**
-   - Tailscale installed
-   - SSH keys configured
-   - Access to mesh-infra repository
+### Phase 1: Network Foundation ✅
+- Connected to Tailscale mesh at 100.84.2.8
+- Hub connectivity verified (hetzner-hq)
+- Service discovery operational
 
-2. **Join the Mesh**
-   ```bash
-   ./scripts/join-mesh.sh
-   ```
+### Phase 2: Configuration Management ✅
+- Ansible managed node ready
+- SSH key authorized for control node
+- Passwordless sudo configured
+- Full automation enabled
 
-3. **Verify Connectivity**
-   ```bash
-   ./scripts/health-check.sh
-   ```
+### Services Provided
+- Development Environment (16 cores, 15GB RAM)
+- AI Agent Host (Claude Code, Codex, Gemini)
+- Build Runner (Node.js, Python, Go, Rust)
+- Ansible Managed Node
+
+## Management
+
+### From Control Node (hetzner-hq)
+```bash
+# Basic connectivity
+ansible laptop.hq -m ping
+
+# Apply configuration
+ansible-playbook -l laptop.hq playbooks/site.yaml
+
+# Install development tools
+ansible-playbook -l laptop.hq playbooks/install-tools.yaml
+```
+
+### Local Operations
+```bash
+# Check readiness
+./scripts/ansible-readiness-check.sh
+
+# Generate status report
+./scripts/report-status.sh
+
+# Test connectivity
+./scripts/test-ansible-connectivity.sh
+```
 
 ## Security Notes
 

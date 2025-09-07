@@ -66,6 +66,13 @@ provides:
         - python
         - rust
         - go
+    - name: ansible_managed_node
+      description: Receives automated configuration from control node
+      management:
+        control_node: hetzner-hq
+        ssh_key_authorized: true
+        passwordless_sudo: true
+        python_version: "3.13.7"
 
 # Services This Device Consumes
 consumes:
@@ -79,6 +86,11 @@ consumes:
     - service: always_on_services
       provider: hetzner-hq
       purpose: Databases, APIs, monitoring
+    - service: ansible_control_node
+      provider: hetzner-hq
+      purpose: Centralized configuration management
+      status: active
+      last_managed: "2025-09-07"
 
 # Operational Characteristics
 operational:

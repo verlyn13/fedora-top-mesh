@@ -1,9 +1,10 @@
-# Mesh Integration Configuration
+# Mesh Integration Configuration  
 # Defines how this device integrates with the mesh-infra repository
 
-version: 1
-integration_type: device_node
+version: 2
+integration_type: ansible_managed_node
 parent_repo: mesh-infra
+phase: 2_complete
 
 # Synchronization Settings
 sync:
@@ -59,3 +60,12 @@ state:
   remote_sync: hetzner-hq:/mesh/nodes/laptop-hq/state
   sync_interval: 300  # seconds
   offline_grace_period: 3600  # seconds before marked offline
+  
+# Ansible Integration Status
+ansible:
+  status: active
+  control_node: hetzner-hq
+  last_run: "2025-09-07"
+  ssh_key_authorized: true
+  passwordless_sudo: true
+  ready_for_management: true
