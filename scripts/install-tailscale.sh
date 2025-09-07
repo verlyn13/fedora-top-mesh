@@ -20,7 +20,8 @@ echo
 
 # Add Tailscale repository
 echo "Step 1: Adding Tailscale repository..."
-sudo dnf config-manager --add-repo https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+# Download repo file directly
+sudo curl -fsSL https://pkgs.tailscale.com/stable/fedora/tailscale.repo -o /etc/yum.repos.d/tailscale.repo
 
 echo
 echo "Step 2: Installing Tailscale package..."
