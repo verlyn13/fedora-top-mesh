@@ -38,13 +38,14 @@ system:
 # Mesh Network Identity
 mesh:
   tailscale_hostname: laptop-hq
-  planned_ip: 10.0.0.2/24
+  actual_ip: 100.84.2.8
   role: workstation
   capabilities:
     - roaming
     - development
     - ai_assisted
   priority: secondary  # Primary is hetzner-hq
+  status: connected  # As of 2025-09-07
 
 # Services This Device Provides
 provides:
