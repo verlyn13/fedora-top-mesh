@@ -1,0 +1,102 @@
+# Ansible Integration Configuration
+# Defines how this laptop participates in Phase 2 Configuration Management
+
+version: 1
+phase: 2
+role: managed_node
+
+# Control Node Information
+control_node:
+  hostname: hetzner-hq
+  ip: 100.84.151.58
+  user: verlyn13
+  ansible_version: latest
+  repository: /opt/mesh-infra/ansible
+
+# This Node's Ansible Identity
+ansible_identity:
+  hostname: laptop.hq
+  inventory_name: laptop.hq
+  ip: 100.84.2.8
+  groups:
+    - all
+    - workstations
+  variables:
+    device_type: laptop
+    os: fedora
+    location: roaming
+    expected_uptime: 40
+    development_environment: true
+    gui_available: true
+
+# Expected Ansible Roles
+assigned_roles:
+  - name: common
+    description: Baseline packages and configurations
+    priority: 1
+  - name: security
+    description: SSH hardening and firewall rules
+    priority: 2
+  - name: tailscale
+    description: Mesh network maintenance
+    priority: 3
+  - name: development
+    description: Development tools and environments
+    priority: 4
+
+# SSH Configuration for Ansible
+ssh_config:
+  user: verlyn13
+  port: 22
+  auth_method: publickey
+  control_node_key: ~/.ssh/ansible_ed25519.pub
+  python_interpreter: /usr/bin/python3
+
+# Ansible Behavior
+ansible_behavior:
+  connection_type: ssh
+  gather_facts: true
+  become_method: sudo
+  retry_files: true
+  max_fail_percentage: 0
+
+# Operational Constraints
+constraints:
+  intermittent_connectivity: true
+  battery_powered: true
+  resource_limited: false
+  requires_gui_support: true
+
+# Compliance and Reporting
+compliance:
+  report_to_control: true
+  fact_caching: 3600
+  log_ansible_runs: true
+  audit_changes: true
+
+# Phase 2 Readiness
+readiness:
+  tailscale: connected
+  ssh: accessible
+  python: installed
+  sudo: available
+  firewall: active
+  selinux: enforcing
+
+# Integration Points
+integration:
+  pre_tasks:
+    - Verify mesh connectivity
+    - Check battery level
+    - Ensure not in sleep mode
+  post_tasks:
+    - Update local status
+    - Report to control node
+    - Log completion
+
+# Playbook Preferences
+playbook_preferences:
+  skip_if_offline: true
+  retry_on_reconnect: true
+  cache_valid_time: 3600
+  parallel_execution: false

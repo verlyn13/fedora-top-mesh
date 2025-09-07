@@ -36,6 +36,8 @@ hooks:
     - ./scripts/cache-state.sh
   on_config_change:
     - ./scripts/apply-config.sh
+  on_ansible_run:
+    - ./scripts/ansible-readiness-check.sh
 
 # Discovery Information
 discovery:
