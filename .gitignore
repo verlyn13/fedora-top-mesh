@@ -1,0 +1,40 @@
+# Environment files
+.env
+.env.local
+*.env
+
+# State files
+state/*.json
+!state/.gitkeep
+
+# Secrets
+*.key
+*.pem
+*.crt
+*.cert
+certificates/
+secrets/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
