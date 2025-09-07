@@ -11,11 +11,11 @@ This document describes the Fedora laptop's participation in Phase 2 of the mesh
 - ✅ Fedora laptop connected (100.84.2.8)
 - ⏳ WSL2 pending
 
-### Phase 2: Configuration Management 🚧 (Ready)
+### Phase 2: Configuration Management ✅ (Complete)
 - ✅ Ansible structure prepared in mesh-infra
-- ✅ Control node designated (Hetzner)
-- ✅ This laptop ready as managed node
-- ⏳ Awaiting control node setup
+- ✅ Control node operational (Hetzner)
+- ✅ This laptop fully configured as managed node
+- ✅ SSH key authorized and passwordless sudo configured
 
 ## This Laptop's Role
 
@@ -51,7 +51,7 @@ laptop.hq:
 | **Sudo** | ✅ | User verlyn13 has access |
 | **Firewall** | ✅ | firewalld active |
 | **SELinux** | ✅ | Enforcing mode |
-| **Control Key** | ⏳ | Awaiting ansible_ed25519.pub |
+| **Control Key** | ✅ | ansible_ed25519.pub authorized |
 
 ## Expected Configurations
 
