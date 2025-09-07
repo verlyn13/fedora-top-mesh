@@ -1,0 +1,109 @@
+# Role Definition for fedora-top in the mesh network
+# This file defines what this device does and how it participates
+
+version: 1
+role_name: roaming_workstation
+role_priority: secondary  # hetzner-hq is primary
+
+# Primary Responsibilities
+primary_functions:
+  - name: development_workstation
+    description: Primary development environment for all coding tasks
+    importance: critical
+    
+  - name: ai_agent_executor
+    description: Runs AI coding assistants (Claude Code, Codex, Gemini)
+    importance: high
+    
+  - name: local_testing
+    description: Executes tests and builds before deployment
+    importance: high
+
+# Mesh Participation
+mesh_behavior:
+  connection_type: intermittent
+  expected_uptime: 40%  # Not always online
+  reconnection_strategy: automatic
+  offline_capabilities:
+    - local_development
+    - cached_operations
+    - queued_sync
+
+# Resource Sharing
+resource_contribution:
+  compute:
+    available: when_online
+    priority: local_first  # Local tasks take precedence
+    max_allocation: 20%    # Max resources for mesh tasks
+    
+  storage:
+    available: no  # Don't use laptop storage for mesh
+    
+  networking:
+    can_relay: no  # Don't relay traffic for other nodes
+    exit_node: no  # Not an exit node
+
+# Dependencies
+depends_on:
+  hetzner-hq:
+    services:
+      - exit_node: required_when_available
+      - persistent_storage: optional
+      - monitoring: optional
+    fallback: direct_internet
+
+# Workload Preferences
+workload:
+  prefers:
+    - interactive_development
+    - quick_iterations
+    - local_execution
+  avoids:
+    - long_running_services
+    - high_bandwidth_tasks
+    - always_on_requirements
+
+# Failover Behavior
+failover:
+  if_primary_unavailable:
+    - continue_local_work
+    - cache_changes
+    - sync_when_restored
+  if_this_unavailable:
+    - mesh_continues_normally
+    - no_critical_services_affected
+
+# Security Context
+security_role:
+  trust_level: trusted
+  access_scope: 
+    - own_projects
+    - shared_repositories
+    - mesh_configuration
+  restrictions:
+    - no_production_access
+    - no_financial_systems
+    - no_customer_data
+
+# Operational Modes
+modes:
+  online:
+    description: Fully connected to mesh
+    services_available: all
+    sync: real_time
+    
+  offline:
+    description: No mesh connectivity
+    services_available: local_only
+    sync: queued
+    
+  degraded:
+    description: Partial connectivity
+    services_available: cached
+    sync: delayed
+
+# Service Level Objectives
+slo:
+  availability_target: 40%  # Expected to be online 40% of time
+  response_time: best_effort
+  data_freshness: eventual_consistency

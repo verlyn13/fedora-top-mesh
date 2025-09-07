@@ -1,0 +1,168 @@
+# Device Profile for fedora-top
+# This file defines the capabilities, role, and specifications of this device
+# Used by mesh-infra to understand this node's place in the network
+
+version: 1
+device_id: fedora-top
+last_updated: 2025-09-07
+
+# Physical Device Information
+hardware:
+  type: laptop
+  manufacturer: Lenovo
+  model: ThinkPad
+  cpu:
+    cores: available  # To be populated dynamically
+    architecture: x86_64
+  memory:
+    total_gb: available  # To be populated dynamically
+  storage:
+    primary:
+      type: nvme
+      total_gb: available
+  network:
+    interfaces:
+      - type: ethernet
+        name: eth0
+      - type: wifi
+        name: wlan0
+
+# Operating System
+system:
+  os: Fedora Linux
+  version: 42
+  kernel: 6.16.3-200.fc42.x86_64
+  platform: linux
+  hostname: fedora-top
+
+# Mesh Network Identity
+mesh:
+  tailscale_hostname: laptop-hq
+  planned_ip: 10.0.0.2/24
+  role: workstation
+  capabilities:
+    - roaming
+    - development
+    - ai_assisted
+  priority: secondary  # Primary is hetzner-hq
+
+# Services This Device Provides
+provides:
+  services:
+    - name: development_environment
+      description: Full development stack with IDE and tools
+      ports: []
+    - name: ai_agent_host
+      description: Runs Claude Code, Codex, and other AI assistants
+      tools:
+        - claude-code
+        - codex-cli
+        - gemini-cli
+    - name: build_runner
+      description: Can execute local builds and tests
+      capabilities:
+        - nodejs
+        - python
+        - rust
+        - go
+
+# Services This Device Consumes
+consumes:
+  from_mesh:
+    - service: exit_node
+      provider: hetzner-hq
+      purpose: Internet access through consistent IP
+    - service: persistent_storage
+      provider: hetzner-hq
+      purpose: Backup and shared files
+    - service: always_on_services
+      provider: hetzner-hq
+      purpose: Databases, APIs, monitoring
+
+# Operational Characteristics
+operational:
+  availability: intermittent  # Not always online
+  mobility: high  # Frequently changes networks
+  power_mode: battery_aware  # May sleep/hibernate
+  network_conditions:
+    - home_wifi
+    - college_campus
+    - public_wifi
+    - mobile_hotspot
+  backup_connectivity:
+    - method: direct_ssh
+      when: on_trusted_network
+    - method: tailscale
+      when: always
+    - method: wireguard_fallback
+      when: tailscale_fails
+
+# Security Profile
+security:
+  ssh_user: verlyn13
+  auth_methods:
+    - ssh_keys
+    - gopass_secrets
+  firewall: enabled
+  selinux: enforcing
+  encrypted_storage: true
+
+# Development Tools
+development:
+  primary_projects_path: /home/verlyn13/Projects
+  package_managers:
+    - npm
+    - pip
+    - cargo
+    - go
+  editors:
+    - vscode
+    - neovim
+  version_control:
+    - git
+    - ds_cli  # Repository manager
+
+# AI Assistant Configuration
+ai_assistants:
+  claude_code:
+    enabled: true
+    models:
+      - sonnet-4
+      - opus-4.1
+    mcp_servers: 10+
+  codex_cli:
+    enabled: true
+    model: gpt-4o-mini
+  gemini_cli:
+    enabled: true
+    model: gemini-2.5
+
+# Integration Points
+integration:
+  mesh_infra_repo: /home/verlyn13/Projects/verlyn13/mesh-infra
+  config_sync:
+    direction: bidirectional
+    frequency: on_change
+  state_reporting:
+    endpoint: hetzner-hq
+    interval: 5m
+  health_checks:
+    - connectivity
+    - service_status
+    - resource_usage
+
+# Constraints and Limitations
+constraints:
+  - intermittent_connectivity
+  - battery_powered
+  - variable_network_quality
+  - may_be_behind_restrictive_firewall
+
+# Tags for Service Discovery
+tags:
+  - laptop
+  - fedora
+  - development
+  - roaming
+  - ai_enabled
+  - verlyn13

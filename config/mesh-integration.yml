@@ -1,0 +1,59 @@
+# Mesh Integration Configuration
+# Defines how this device integrates with the mesh-infra repository
+
+version: 1
+integration_type: device_node
+parent_repo: mesh-infra
+
+# Synchronization Settings
+sync:
+  # What this device reports to mesh-infra
+  reports_to_parent:
+    - device_status
+    - connectivity_state
+    - service_availability
+    - resource_metrics
+  
+  # What this device receives from mesh-infra
+  receives_from_parent:
+    - network_policies
+    - security_updates
+    - service_discovery
+    - routing_tables
+
+# API Endpoints (when connected to mesh)
+api:
+  status_endpoint: http://laptop-hq.hq:9090/status
+  metrics_endpoint: http://laptop-hq.hq:9090/metrics
+  config_endpoint: http://laptop-hq.hq:9090/config
+
+# Event Hooks
+hooks:
+  on_mesh_join:
+    - ./scripts/register-with-hub.sh
+    - ./scripts/sync-policies.sh
+  on_mesh_leave:
+    - ./scripts/cache-state.sh
+  on_config_change:
+    - ./scripts/apply-config.sh
+
+# Discovery Information
+discovery:
+  advertise:
+    hostname: fedora-top
+    mesh_name: laptop-hq
+    services:
+      - development_environment
+      - ai_agent_host
+    capabilities:
+      - can_build
+      - can_test
+      - has_gpu: false
+      - mobile: true
+
+# State Management
+state:
+  local_cache: ./state/current.json
+  remote_sync: hetzner-hq:/mesh/nodes/laptop-hq/state
+  sync_interval: 300  # seconds
+  offline_grace_period: 3600  # seconds before marked offline
