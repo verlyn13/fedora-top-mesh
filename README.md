@@ -104,7 +104,7 @@ This repository should be kept in sync with mesh-infra policies while maintainin
 
 ## Status
 
-✅ **Operational**: Fully integrated mesh node with Ansible management ready
+🔄 **Phase 2.8 Ready**: WSL deployment complete, laptop ready for mesh-ops user deployment
 
 ---
 

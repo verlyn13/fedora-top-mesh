@@ -66,9 +66,10 @@ Due to dnf5 challenges and successful 3-node deployment, implementation has evol
 2. **This Laptop**: Second wave - stable testing platform  
 3. **Hetzner**: Final deployment - maintains control node stability
 
-**Current Status**: Ready for second-wave deployment in WSL → Laptop → Hetzner order
-**WSL2 Status**: ✅ Deployed at 100.88.131.44, ready for initial configuration
-**Advantage**: More robust rollout with better risk mitigation
+**Phase 2.8 Status**: 🔄 Wave 2 Ready - WSL Complete, Laptop Deployment Available
+**WSL2 Status**: ✅ **mesh-ops COMPLETE** at wsl-fedora-kbc (100.88.131.44)
+**Laptop Status**: 🟡 Ready for deployment with proven scripts from WSL success
+**Deployment Command**: `cd mesh-infra && ./scripts/deploy-laptop.sh`
 
 ## Verification Commands
 

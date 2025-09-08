@@ -45,9 +45,11 @@ mesh:
     - development
     - ai_assisted
     - second_wave_deployment_target
+    - mesh_ops_ready
   priority: secondary  # Primary is hetzner-hq
   status: connected  # As of 2025-09-07
   rollout_position: 2  # WSL (1) → Laptop (2) → Hetzner (3)
+  phase_28_status: ready_for_deployment
 
 # Services This Device Provides
 provides:
@@ -75,6 +77,13 @@ provides:
         ssh_key_authorized: true
         passwordless_sudo: true
         python_version: "3.13.7"
+    - name: mesh_ops_deployment_target
+      description: Ready for mesh-ops user deployment (Phase 2.8)
+      readiness:
+        wsl_success_validated: true
+        full_linux_advantages: true
+        deployment_script_available: true
+        validation_framework_ready: true
 
 # Services This Device Consumes
 consumes:
