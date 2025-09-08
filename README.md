@@ -104,7 +104,7 @@ This repository should be kept in sync with mesh-infra policies while maintainin
 
 ## Status
 
-🔄 **Phase 2.8 Ready**: WSL deployment complete, laptop ready for mesh-ops user deployment
+✅ **Phase 2.8 Complete**: mesh-ops user deployed successfully! (2/3 nodes operational)
 
 ---
 
