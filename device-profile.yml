@@ -49,8 +49,9 @@ mesh:
   priority: secondary  # Primary is hetzner-hq
   status: connected  # As of 2025-09-07
   rollout_position: 2  # WSL (1) → Laptop (2) → Hetzner (3)
-  phase_28_status: deployed_complete
+  phase_28_status: phase_complete_100_percent
   mesh_ops_user: operational  # UID 2000, deployed 2025-09-07
+  mesh_ops_coverage: full  # All 3 nodes operational as of 2025-09-08
 
 # Services This Device Provides
 provides:

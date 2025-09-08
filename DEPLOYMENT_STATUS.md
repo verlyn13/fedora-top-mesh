@@ -66,10 +66,11 @@ Due to dnf5 challenges and successful 3-node deployment, implementation has evol
 2. **This Laptop**: Second wave - stable testing platform  
 3. **Hetzner**: Final deployment - maintains control node stability
 
-**Phase 2.8 Status**: ✅ **Wave 2 COMPLETE** - mesh-ops deployed successfully!
+**Phase 2.8 Status**: ✅ **COMPLETE** - All nodes have mesh-ops deployed!
 **WSL2 Status**: ✅ mesh-ops operational at wsl-fedora-kbc (100.88.131.44)
 **Laptop Status**: ✅ **mesh-ops COMPLETE** - deployment successful on 2025-09-07
-**Current Achievement**: 2/3 nodes (67%) now have mesh-ops operational
+**Hetzner Status**: ✅ mesh-ops deployed on 2025-09-08 (after SSH incident resolution)
+**Final Achievement**: 3/3 nodes (100%) - Full mesh-ops coverage achieved!
 
 ## mesh-ops Verification Commands
 
@@ -98,7 +99,16 @@ tailscale ping hetzner-hq
 
 ---
 
+## Hetzner SSH Incident Report (2025-09-08)
+
+During the final Phase 2.8 deployment to Hetzner (Wave 3), an SSH configuration issue occurred that temporarily locked out administrative access. The incident was successfully resolved through console access and demonstrates the importance of:
+- Phased rollout strategy (testing on WSL and laptop first)
+- Maintaining emergency access methods (console access)
+- Careful sudoers configuration validation
+
+The mesh-ops user is now fully operational on all three nodes with appropriate security constraints.
+
 ---
 
-**Phase Status**: Phase 2 Complete - Configuration Management Operational  
-**Last Updated**: 2025-09-07 02:30 UTC
+**Phase Status**: Phase 2.8 Complete - Full mesh-ops Deployment Achieved  
+**Last Updated**: 2025-09-08 (100% deployment confirmed)
