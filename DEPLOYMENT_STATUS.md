@@ -52,16 +52,23 @@
 - **Sudo**: Passwordless for automation
 - **Python**: 3.13.7 for Ansible modules
 
-## Next Steps (Phase 3) - Ready to Begin
+## Next Steps - Revised Multi-Phase Approach
 
-- [ ] File synchronization with Syncthing (Phase 3 approved)
-- [ ] Backup strategies implementation
-- [ ] Cross-node data sharing (all 3 nodes when WSL2 joins)
-- [ ] Observability and monitoring setup
+Due to dnf5 challenges and successful 3-node deployment, implementation has evolved to **Phase 2-8 strategy**:
 
-**Phase 3 Status**: 🎉 Ready to implement - All nodes deployed!
-**Target**: Begin 3-node file synchronization implementation
-**WSL2 Details**: Deployed as wsl-fedora-kbc at 100.88.131.44
+### Phase Evolution
+- ✅ **Phase 1**: Network Foundation (100% complete)
+- ✅ **Phase 2**: Configuration Management (operational on 2/3 nodes)
+- 📋 **Phase 2-8**: Comprehensive mesh-ops implementation
+
+### Revised Implementation Order
+1. **WSL2** (wsl-fedora-kbc): First target - handles corporate constraints
+2. **This Laptop**: Second wave - stable testing platform  
+3. **Hetzner**: Final deployment - maintains control node stability
+
+**Current Status**: Ready for second-wave deployment in WSL → Laptop → Hetzner order
+**WSL2 Status**: ✅ Deployed at 100.88.131.44, ready for initial configuration
+**Advantage**: More robust rollout with better risk mitigation
 
 ## Verification Commands
 

@@ -1,10 +1,11 @@
 # Mesh Integration Configuration  
 # Defines how this device integrates with the mesh-infra repository
 
-version: 2
-integration_type: ansible_managed_node
+version: 3
+integration_type: second_wave_deployment_target
 parent_repo: mesh-infra
-phase: 2_complete
+phase: 2_complete_awaiting_phase_2-8
+rollout_order: 2  # WSL → Laptop → Hetzner
 
 # Synchronization Settings
 sync:

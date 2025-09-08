@@ -44,8 +44,10 @@ mesh:
     - roaming
     - development
     - ai_assisted
+    - second_wave_deployment_target
   priority: secondary  # Primary is hetzner-hq
   status: connected  # As of 2025-09-07
+  rollout_position: 2  # WSL (1) → Laptop (2) → Hetzner (3)
 
 # Services This Device Provides
 provides:
