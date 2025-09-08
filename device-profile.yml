@@ -49,7 +49,8 @@ mesh:
   priority: secondary  # Primary is hetzner-hq
   status: connected  # As of 2025-09-07
   rollout_position: 2  # WSL (1) → Laptop (2) → Hetzner (3)
-  phase_28_status: ready_for_deployment
+  phase_28_status: deployed_complete
+  mesh_ops_user: operational  # UID 2000, deployed 2025-09-07
 
 # Services This Device Provides
 provides:
@@ -77,13 +78,14 @@ provides:
         ssh_key_authorized: true
         passwordless_sudo: true
         python_version: "3.13.7"
-    - name: mesh_ops_deployment_target
-      description: Ready for mesh-ops user deployment (Phase 2.8)
-      readiness:
-        wsl_success_validated: true
-        full_linux_advantages: true
-        deployment_script_available: true
-        validation_framework_ready: true
+    - name: mesh_ops_platform
+      description: Operational mesh-ops user for mesh-wide operations
+      deployment:
+        completion_date: 2025-09-07
+        user_uid: 2000
+        shell: /bin/bash
+        sudo_scope: limited_mesh_operations
+        tailscale_access: full_mesh_visibility
 
 # Services This Device Consumes
 consumes:

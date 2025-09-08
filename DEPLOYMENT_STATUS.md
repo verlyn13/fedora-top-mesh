@@ -66,25 +66,34 @@ Due to dnf5 challenges and successful 3-node deployment, implementation has evol
 2. **This Laptop**: Second wave - stable testing platform  
 3. **Hetzner**: Final deployment - maintains control node stability
 
-**Phase 2.8 Status**: 🔄 Wave 2 Ready - WSL Complete, Laptop Deployment Available
-**WSL2 Status**: ✅ **mesh-ops COMPLETE** at wsl-fedora-kbc (100.88.131.44)
-**Laptop Status**: 🟡 Ready for deployment with proven scripts from WSL success
-**Deployment Command**: `cd mesh-infra && ./scripts/deploy-laptop.sh`
+**Phase 2.8 Status**: ✅ **Wave 2 COMPLETE** - mesh-ops deployed successfully!
+**WSL2 Status**: ✅ mesh-ops operational at wsl-fedora-kbc (100.88.131.44)
+**Laptop Status**: ✅ **mesh-ops COMPLETE** - deployment successful on 2025-09-07
+**Current Achievement**: 2/3 nodes (67%) now have mesh-ops operational
 
-## Verification Commands
+## mesh-ops Verification Commands
 
 ```bash
-# Check mesh status
+# Verify mesh-ops user
+id mesh-ops
+# Expected: uid=2000(mesh-ops) gid=2000(mesh-ops) groups=2000(mesh-ops),10(wheel),190(systemd-journal),973(docker)
+
+# Check home directory
+ls -ld /home/mesh-ops
+# Expected: drwx------. mesh-ops mesh-ops
+
+# Test Tailscale access
+sudo -u mesh-ops tailscale status
+# Should show all 3 mesh nodes
+
+# Test shell access
+sudo -u mesh-ops bash -c 'echo "User: $USER on $(hostname)"'
+# Expected: User: mesh-ops on fedora-top
+
+# Original mesh verification (verlyn13 user)
 tailscale status
-
-# Test hub connectivity
 tailscale ping hetzner-hq
-
-# Generate status report
 ./scripts/report-status.sh
-
-# View current mesh IP
-tailscale ip -4
 ```
 
 ---
